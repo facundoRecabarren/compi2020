@@ -207,6 +207,9 @@ namespace at.jku.ssw.cc
             token = laToken;
             laToken = Scanner.Next();
             //La 1° vez q se ejecuta, token queda con Token(1, 1), laToken con "class" (primer token del programa)
+            System.Windows.Forms.TreeNode node = Program1.form1.treeTokens.Nodes.Add("Token: " + token.str + ", Token Kind:" + token.kind);
+            node.Expand(); 
+            node.Nodes.Add("laToken: " + laToken.str + ", laToken Kind: " + laToken.kind);
             la = laToken.kind;
         }
 
