@@ -1427,6 +1427,15 @@ namespace at.jku.ssw.cc //Compilador //text_Box_Mio
             pr.Start();
         }
 
+        private void tokensToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //hacemos visible la pestaña tokens
+            tabControl1.SelectedIndex = 3;
+            treeView1.Nodes.Clear();
+            inicializa();
+            compilar();
+        }
+
         private void acercaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             acerca_de f = new acerca_de();

@@ -109,6 +109,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.tokensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.pag1.SuspendLayout();
@@ -478,7 +479,8 @@
             this.árbolDeDerivaciónToolStripMenuItem,
             this.tablaDeSímbolosToolStripMenuItem,
             this.instruccionesToolStripMenuItem,
-            this.gramaticaToolStripMenuItem});
+            this.gramaticaToolStripMenuItem,
+            this.tokensToolStripMenuItem});
             this.inspeccionarToolStripMenuItem.Name = "inspeccionarToolStripMenuItem";
             this.inspeccionarToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
             this.inspeccionarToolStripMenuItem.Text = "Inspeccionar";
@@ -844,6 +846,13 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Visible = false;
             // 
+            // tokensToolStripMenuItem
+            // 
+            this.tokensToolStripMenuItem.Name = "tokensToolStripMenuItem";
+            this.tokensToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.tokensToolStripMenuItem.Text = "Tokens";
+            this.tokensToolStripMenuItem.Click += new System.EventHandler(this.tokensToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -979,5 +988,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         //cambio a public por no ser accesible
         public System.Windows.Forms.TreeView treeTokens;
+        private System.Windows.Forms.ToolStripMenuItem tokensToolStripMenuItem;
     }
 }
