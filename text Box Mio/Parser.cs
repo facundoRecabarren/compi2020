@@ -454,12 +454,14 @@ namespace at.jku.ssw.cc
         //-------------------------------------------------Grupo 2 28/9/2015-----------------------------------------------------------------------         
         public static void Identifieropc(System.Windows.Forms.TreeNode identifieropc, Struct type, Symbol.Kinds kind)//NUEVA FUNCION RECURSIVA QUE CUELGA LOS IDENTIFIEROPC
         {
+            
             if (la == Token.COMMA && la != Token.EOF)
             {
 
                 Scan();
                 Code.Colorear("token");
                 Code.cargaProgDeLaGram("IdentifiersOpc = ',' ident  IdentifiersOpc.");//deberia extender el arbol
+                MessageBoxCon3Preg();
                 identifieropc.Nodes.Add("','");
                 if (muestraProducciones)
                     MessageBoxCon3Preg();
@@ -467,6 +469,7 @@ namespace at.jku.ssw.cc
                 if (muestraProducciones)
                     MessageBoxCon3Preg();
                 Code.Colorear("token");
+                MessageBoxCon3Preg();
                 identifieropc.Nodes.Add("ident");
                 MessageBoxCon3Preg();
                 System.Windows.Forms.TreeNode identifieropc1 = new System.Windows.Forms.TreeNode("IdentifiersOpc");
@@ -507,19 +510,20 @@ namespace at.jku.ssw.cc
             //int en int x;
             //-------------------------------------------------Grupo 2 28/9/2015----------------------------------------------------------------------- 
             Code.Colorear("token");
+            MessageBoxCon3Preg();
             hijo1.Nodes.Add("ident");
             hijo1.ExpandAll();
-            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(12);
             //-------------------------------------------------Grupo 2 28/9/2015----------------------------------------------------------------------- 
             System.Windows.Forms.TreeNode lbrakopc = new System.Windows.Forms.TreeNode("LbrakeOpc");
             MessageBoxCon3Preg();
             hijo1.Nodes.Add(lbrakopc);
+            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(13);
             MessageBoxCon3Preg();
             Code.Colorear("latoken");
             //-------------------------------------------------Grupo 2 28/9/2015----------------------------------------------------------------------- 
-            MessageBoxCon3Preg();
+            
             lbrakopc.Nodes.Add(".");
             lbrakopc.ExpandAll();
             MessageBoxCon3Preg();
@@ -528,9 +532,10 @@ namespace at.jku.ssw.cc
             //-------------------------------------------------Grupo 2 28/9/2015----------------------------------------------------------------------- 
             Check(Token.IDENT); // "pos", en int pos,   .....int,....  x, i, etc
             Code.seleccLaProdEnLaGram(6);
-            padre.Nodes.Add("ident");// Hace referencia a la x
             MessageBoxCon3Preg();
-            Code.Colorear("token"); 
+            padre.Nodes.Add("ident");// Hace referencia a la x
+            Code.Colorear("token");
+            MessageBoxCon3Preg();
             System.Windows.Forms.TreeNode hijo2 = new System.Windows.Forms.TreeNode("IdentifiersOpc");
             padre.Nodes.Add(hijo2);
             //-------------------------------------------------Grupo 2 28/9/2015----------------------------------------------------------------------- 
@@ -544,13 +549,17 @@ namespace at.jku.ssw.cc
             Code.CreateMetadata(vble); //Para el campo pos (en int[] pos)Global, Field o .....  
             //o Para la vbe Global val
             //o para x en int x;
+            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(7);
             Identifieropc(hijo2, type, kind);
+            MessageBoxCon3Preg();
             Code.Colorear("latoken"); 
             Check(Token.SEMICOLON);
-            MessageBoxCon3Preg();
+            
             Code.seleccLaProdEnLaGram(6);
+            
             Code.Colorear("token");
+            MessageBoxCon3Preg();
             padre.Nodes.Add("';'");
             MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(8);
@@ -646,6 +655,7 @@ namespace at.jku.ssw.cc
                     MessageBoxCon3Preg();
                     Code.seleccLaProdEnLaGram(8);
                     type = Tab.noType; //  para void
+                    MessageBoxCon3Preg();
                 }
                 else
                     if (la == Token.IDENT)
@@ -680,6 +690,7 @@ namespace at.jku.ssw.cc
                 {
                     FormPars(pars);  //Aqui hay que crear los symbolos para los args 
                     Code.Colorear("token");  //pinta el ")"
+                    MessageBoxCon3Preg();
                     methodDecl.Nodes.Add("')'");
                     MessageBoxCon3Preg();
                     Check(Token.RPAR);
@@ -690,8 +701,10 @@ namespace at.jku.ssw.cc
                     Code.Colorear("latoken");  //pinta el ")"
                     Check(Token.RPAR);
                     Code.seleccLaProdEnLaGram(8);
+                    MessageBoxCon3Preg();
                     pars.Nodes.Add(".");
                     pars.ExpandAll();
+                    MessageBoxCon3Preg();
                     methodDecl.Nodes.Add("')'");
                     MessageBoxCon3Preg();
                 }
@@ -718,6 +731,7 @@ namespace at.jku.ssw.cc
                             posDeclars.ExpandAll();
                             MessageBoxCon3Preg();
                             Code.seleccLaProdEnLaGram(2);
+                            MessageBoxCon3Preg();
                             System.Windows.Forms.TreeNode varDecl = new System.Windows.Forms.TreeNode("VarDecl");
                             declaration.Nodes.Add(varDecl);
                             declaration.ExpandAll();
@@ -731,9 +745,10 @@ namespace at.jku.ssw.cc
                             Errors.Error("espero una declaracion de variable");
                         }
                     }
-                    //Termina Vardecl.
+                //Termina Vardecl.
+                MessageBoxCon3Preg();
                 Code.seleccLaProdEnLaGram(2);
-
+                MessageBoxCon3Preg();
                 if (cantVarLocales > 0)
                 {
                     string instrParaVarsLocs = ".locals init(int32 V_0";
@@ -745,14 +760,16 @@ namespace at.jku.ssw.cc
                     Code.cargaInstr(instrParaVarsLocs);
 
                 }
+                
                 Code.seleccLaProdEnLaGram(1);
                 MessageBoxCon3Preg();
                 System.Windows.Forms.TreeNode posDeclarsAux = new System.Windows.Forms.TreeNode("PosDeclars");
+                posDeclars.Nodes.Add(posDeclarsAux);
+                MessageBoxCon3Preg();
                 posDeclarsAux.Nodes.Add(".");
                 posDeclarsAux.ExpandAll();
-                posDeclars.Nodes.Add(posDeclarsAux);
-                Code.Colorear("latoken");  //"{"
                 MessageBoxCon3Preg();
+                Code.Colorear("latoken");  //"{"
                 Code.seleccLaProdEnLaGram(8);
                 MessageBoxCon3Preg();
                 //Comienza Block
@@ -866,9 +883,11 @@ namespace at.jku.ssw.cc
             {
                 Code.Colorear("token"); //laToken (ident)  "writeln"  ya pintado  o "var1" en var1 = 10;
                 Item itemIzq, itemDer; // = new Item();  // 
+                MessageBoxCon3Preg();
                 Code.seleccLaProdEnLaGram(31);  //scroll needed
                 //-------------------------------------------------Grupo 2 28/9/2015-----------------------------------------------------------
                 System.Windows.Forms.TreeNode designator = new System.Windows.Forms.TreeNode("Designator");
+                MessageBoxCon3Preg();
                 statement.Nodes.Add(designator);
                 statement.ExpandAll();
                 MessageBoxCon3Preg(statement);
@@ -882,6 +901,7 @@ namespace at.jku.ssw.cc
                 Code.seleccLaProdEnLaGram(22);
                 MessageBoxCon3Preg();
                 Code.Colorear("latoken");
+                
                 statement.Nodes.Add(RestOfstatement);
                 RestOfstatement.ExpandAll();
                 MessageBoxCon3Preg(statement);
@@ -895,11 +915,14 @@ namespace at.jku.ssw.cc
                             Check(Token.ASSIGN);
                             Code.Colorear("token");
                             //-------------------------------------------------Grupo 2 30/9/2015-----------------------------------------------------------
+                            MessageBoxCon3Preg();
                             RestOfstatement.Nodes.Add("'='");
                             RestOfstatement.ExpandAll();
                             MessageBoxCon3Preg(RestOfstatement);
+                            MessageBoxCon3Preg();
                             System.Windows.Forms.TreeNode nexpr = new System.Windows.Forms.TreeNode("Expr");
                             Code.seleccLaProdEnLaGram(23);
+                            MessageBoxCon3Preg();
                             RestOfstatement.Nodes.Add(nexpr);
                             MessageBoxCon3Preg(RestOfstatement);
                             //-------------------------------------------------Grupo 2 30/9/2015-----------------------------------------------------------
@@ -1316,25 +1339,31 @@ namespace at.jku.ssw.cc
         {
             System.Windows.Forms.TreeNode block = new System.Windows.Forms.TreeNode("Block");
             Code.seleccLaProdEnLaGram(16);
+            MessageBoxCon3Preg();
             methodDecl.Nodes.Add(block);
             methodDecl.ExpandAll();
             MessageBoxCon3Preg(block);
             ////// Agrega '{' al arbol
             Check(Token.LBRACE);
+            MessageBoxCon3Preg();
             block.Nodes.Add("'{'");
             block.ExpandAll();
             MessageBoxCon3Preg(methodDecl);
             Code.Colorear("token");
+            MessageBoxCon3Preg();
             /////// Agrega 'StatementsOpc' al arbol
             System.Windows.Forms.TreeNode statementsopc = new System.Windows.Forms.TreeNode("StatementsOpc");
             block.Nodes.Add(statementsopc);
             block.ExpandAll();
             MessageBoxCon3Preg(block);
+            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(17);
             /////// Agrega '.' al arbol si el block esta vacio
             if (la == Token.RBRACE)
             {
+                MessageBoxCon3Preg();
                 Code.Colorear("latoken");
+                MessageBoxCon3Preg();
                 statementsopc.Nodes.Add(".");
                 statementsopc.ExpandAll();
                 MessageBoxCon3Preg(statementsopc);
@@ -1346,11 +1375,13 @@ namespace at.jku.ssw.cc
                   || la == Token.RETURN || la == Token.READ || la == Token.WRITE || la == Token.WRITELN
                   || la == Token.LBRACE || la == Token.SEMICOLON) && la != Token.EOF)
                 {
+                    MessageBoxCon3Preg();
                     Code.Colorear("latoken");
                     System.Windows.Forms.TreeNode statement = new System.Windows.Forms.TreeNode("Statement");
                     statementsopc.Nodes.Add(statement);
                     statementsopc.ExpandAll();
                     MessageBoxCon3Preg(statement);
+                    MessageBoxCon3Preg();
                     Code.seleccLaProdEnLaGram(18);
                     if (ZZ.ParserStatem)
                     {
@@ -1557,10 +1588,13 @@ namespace at.jku.ssw.cc
             if (la == Token.MINUS)
             {
                 Check(Token.MINUS);
-                OpcMinus.Nodes.Add("-");
+                MessageBoxCon3Preg();
                 padre.Nodes.Add(OpcMinus);
                 padre.ExpandAll();
+                MessageBoxCon3Preg();
+                OpcMinus.Nodes.Add("-");
                 MessageBoxCon3Preg(padre);
+                MessageBoxCon3Preg();
                 padre.Nodes.Add(Term);
                 MessageBoxCon3Preg(padre);
                 Parser.Term(out item, Term);
@@ -1573,28 +1607,41 @@ namespace at.jku.ssw.cc
             }
             else
             {
+                MessageBoxCon3Preg();
                 Code.Colorear("latoken");
+
+                padre.Nodes.Add(OpcMinus);
+                padre.ExpandAll();
+                MessageBoxCon3Preg();
+                Code.seleccLaProdEnLaGram(24);
+                MessageBoxCon3Preg();
                 OpcMinus.Nodes.Add(".");
                 OpcMinus.ExpandAll();
                 MessageBoxCon3Preg(OpcMinus);
-                padre.Nodes.Add(OpcMinus);
-                padre.ExpandAll();
+                MessageBoxCon3Preg();
                 MessageBoxCon3Preg(padre);
                 padre.Nodes.Add(Term);
                 MessageBoxCon3Preg(padre);
+                MessageBoxCon3Preg();
+                Code.seleccLaProdEnLaGram(26);
                 Parser.Term(out item, Term);
             }
             string opString = "";
             System.Windows.Forms.TreeNode OpcAddopTerms = new System.Windows.Forms.TreeNode("OpcAddopTerms");
             padre.Nodes.Add(OpcAddopTerms);
             MessageBoxCon3Preg(padre);
+            MessageBoxCon3Preg();
+            Code.seleccLaProdEnLaGram(25);
             bool existe_Addop_opc = false;
             while ((la == Token.PLUS || la == Token.MINUS) && la != Token.EOF)
             {
+                MessageBoxCon3Preg();
                 System.Windows.Forms.TreeNode AddOp = new System.Windows.Forms.TreeNode("AddOp");
                 OpcAddopTerms.Nodes.Add(AddOp);
                 OpcAddopTerms.ExpandAll();
                 MessageBoxCon3Preg(OpcAddopTerms);
+                MessageBoxCon3Preg();
+                Code.seleccLaProdEnLaGram(33);
                 existe_Addop_opc = true;
                 if (la == Token.PLUS)
                 {
@@ -1602,6 +1649,7 @@ namespace at.jku.ssw.cc
                     op = Code.ADD;
                     opString = "add       ";
                     Code.Colorear("token");
+                    MessageBoxCon3Preg();
                     AddOp.Nodes.Add("'+'");
                     AddOp.ExpandAll();
                     MessageBoxCon3Preg(AddOp);
@@ -1613,16 +1661,21 @@ namespace at.jku.ssw.cc
                     opString = "sub       ";
                     Code.cargaProgDeLaGram("AddOp = '-'.");
                     Code.Colorear("token");
+                    MessageBoxCon3Preg();
                     AddOp.Nodes.Add("'-'");
                     AddOp.ExpandAll();
                     MessageBoxCon3Preg(AddOp);
                 }
                 else op = Code.DUP;
+                MessageBoxCon3Preg();
                 Code.Colorear("token");
                 Code.Load(item);
                 System.Windows.Forms.TreeNode Term_OpcAddop = new System.Windows.Forms.TreeNode("Term");
                 OpcAddopTerms.Nodes.Add(Term_OpcAddop);
+                MessageBoxCon3Preg();
+                Code.seleccLaProdEnLaGram(26);
                 Parser.Term(out itemSig, Term_OpcAddop);
+                MessageBoxCon3Preg();
                 Code.Load(itemSig);
                 if (item.type != Tab.intType || itemSig.type != Tab.intType)
                     Errors.Error("Los operandos deben ser de tipo int");
@@ -1639,6 +1692,7 @@ namespace at.jku.ssw.cc
 
             if (existe_Addop_opc == false)
             {
+                MessageBoxCon3Preg();
                 OpcAddopTerms.Nodes.Add(" . ");
                 OpcAddopTerms.ExpandAll();
                 MessageBoxCon3Preg(OpcAddopTerms);
@@ -1913,17 +1967,24 @@ namespace at.jku.ssw.cc
             if (la == Token.IDENT || la == Token.NUMBER || la == Token.CHARCONST || la == Token.NEW || la == Token.LPAR)
             {
                 System.Windows.Forms.TreeNode Factor = new System.Windows.Forms.TreeNode("Factor");
+                MessageBoxCon3Preg();
                 padre.Nodes.Add(Factor);
                 padre.ExpandAll();
                 MessageBoxCon3Preg(padre);
+                MessageBoxCon3Preg();
+                Code.seleccLaProdEnLaGram(28);
                 Parser.Factor(out item, Factor);
                 bool existe_OpcMulOpFactor = false;
+                MessageBoxCon3Preg();
                 System.Windows.Forms.TreeNode OpcMulopFactors = new System.Windows.Forms.TreeNode("OpcMulopFactors");
                 padre.Nodes.Add(OpcMulopFactors);
                 MessageBoxCon3Preg(padre);
+                MessageBoxCon3Preg();
+                Code.seleccLaProdEnLaGram(27);
                 while ((la == Token.TIMES || la == Token.SLASH || la == Token.REM) && la != Token.EOF)
                 {
                     Code.cargaProgDeLaGram("OpcMulopFactor = Mulop Factor.");
+                    MessageBoxCon3Preg();
                     System.Windows.Forms.TreeNode MulOp = new System.Windows.Forms.TreeNode("MulOp");
                     OpcMulopFactors.Nodes.Add(MulOp);
                     OpcMulopFactors.ExpandAll();
@@ -1938,6 +1999,7 @@ namespace at.jku.ssw.cc
                                 Code.Colorear("token");
                                 Code.cargaProgDeLaGram("Mulop =	'*'.");
                                 existe_OpcMulOpFactor = true;
+                                MessageBoxCon3Preg();
                                 Code.seleccLaProdEnLaGram(34);
                                 MessageBoxCon3Preg();
                                 MulOp.Nodes.Add("'*'");
@@ -1953,6 +2015,7 @@ namespace at.jku.ssw.cc
                                 existe_OpcMulOpFactor = true;
                                 Code.Colorear("token");
                                 Code.cargaProgDeLaGram("Mulop =	'/'.");
+                                MessageBoxCon3Preg();
                                 Code.seleccLaProdEnLaGram(34);
                                 MessageBoxCon3Preg();
                                 MulOp.Nodes.Add("'/'");
@@ -1970,12 +2033,16 @@ namespace at.jku.ssw.cc
                             op = Code.REM;
                             break;
                     } //Fin switch
+                    MessageBoxCon3Preg();
                     Code.Load(item);
+                    MessageBoxCon3Preg();
                     System.Windows.Forms.TreeNode Factor_OpcMulop = new System.Windows.Forms.TreeNode("Factor");
                     OpcMulopFactors.Nodes.Add(Factor_OpcMulop);
                     OpcMulopFactors.ExpandAll();
+                    Code.seleccLaProdEnLaGram(28);
                     MessageBoxCon3Preg(OpcMulopFactors);
                     Parser.Factor(out itemSig, Factor_OpcMulop);
+                    MessageBoxCon3Preg();
                     Code.Load(itemSig);
                     if (item.type != Tab.intType || itemSig.type != Tab.intType)
                     {
@@ -1993,13 +2060,15 @@ namespace at.jku.ssw.cc
                 }//Fin while
                 if (existe_OpcMulOpFactor == false)
                 {
+                    MessageBoxCon3Preg();
                     OpcMulopFactors.Nodes.Add(".");
                     OpcMulopFactors.ExpandAll();
                     MessageBoxCon3Preg(OpcMulopFactors);
                     Code.cargaProgDeLaGram("OpcMulopFactor = .");
+                    MessageBoxCon3Preg();
                     Code.Colorear("latoken");
                 }
-               MessageBoxCon3Preg();
+
             }
             else
             {
@@ -2016,6 +2085,7 @@ namespace at.jku.ssw.cc
             if (la == Token.IDENT)
             {
                 System.Windows.Forms.TreeNode Designator = new System.Windows.Forms.TreeNode("Designator");
+                MessageBoxCon3Preg();
                 padre.Nodes.Add(Designator);
                 padre.ExpandAll();
                 MessageBoxCon3Preg(padre);
@@ -2035,6 +2105,7 @@ namespace at.jku.ssw.cc
                 else
                 {
                     Code.cargaProgDeLaGram("OpcRestOfMethCall = .");
+                    MessageBoxCon3Preg();
                     Code.Colorear("latoken"); // el "("
                     MessageBoxCon3Preg();
                 }
@@ -2048,11 +2119,14 @@ namespace at.jku.ssw.cc
                             Code.cargaProgDeLaGram("Factor = number.");
                             Code.Colorear("token");
                             System.Windows.Forms.TreeNode number = new System.Windows.Forms.TreeNode("number.");
+                            MessageBoxCon3Preg();
                             padre.Nodes.Add(number);
                             padre.ExpandAll();
                             MessageBoxCon3Preg(padre);
                             item = new Item(token.val);//Nuevo
+                            MessageBoxCon3Preg();
                             Code.Load(item);
+                            MessageBoxCon3Preg(padre);
                             break;
                         }
                     case Token.CHARCONST:
@@ -2090,6 +2164,7 @@ namespace at.jku.ssw.cc
                                 Check(Token.LBRACK);
                                 Parser.Expr(out item);
                                 if (item.type != Tab.intType) Errors.Error("array size must be of type int");
+                                MessageBoxCon3Preg();
                                 Code.Load(item); //genera cod p/cargar el result de la expr	
                                 Code.il.Emit(Code.NEWARR, type.sysType); //NEWARR de char
                                 type = new Struct(Struct.Kinds.Arr, type);
@@ -2117,13 +2192,18 @@ namespace at.jku.ssw.cc
                     case Token.LPAR:
                         {
                             Check(Token.LPAR);
+                            MessageBoxCon3Preg();
                             padre.Nodes.Add("'('");
                             padre.ExpandAll();
                             MessageBoxCon3Preg(padre);
                             System.Windows.Forms.TreeNode Expr = new System.Windows.Forms.TreeNode("Expr");
+                            MessageBoxCon3Preg();
                             padre.Nodes.Add(Expr);
                             MessageBoxCon3Preg(padre);
+                            MessageBoxCon3Preg();
+                            Code.seleccLaProdEnLaGram(23);
                             Parser.Expr(out item, Expr);
+                            MessageBoxCon3Preg();
                             Check(Token.RPAR);
                             padre.Nodes.Add("')'");
                             MessageBoxCon3Preg(padre);
@@ -2148,12 +2228,14 @@ namespace at.jku.ssw.cc
             padre.Nodes.Add("Ident");
             padre.ExpandAll();
             MessageBoxCon3Preg(padre);
+            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(31);
             //-------------------------------------------------Grupo 2 28/9/2015-----------------------------------------------------------
             System.Windows.Forms.TreeNode hijo2 = new System.Windows.Forms.TreeNode("opcRestOfDesignator");
             MessageBoxCon3Preg(padre);
             padre.Nodes.Add(hijo2);
             MessageBoxCon3Preg(padre);
+            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(32);
             //-------------------------------------------------Grupo 2 28/9/2015-----------------------------------------------------------
             Symbol sym = Tab.Find(token.str);
@@ -2172,6 +2254,7 @@ namespace at.jku.ssw.cc
                         Check(Token.PERIOD); //caso del val . pos
                         Code.cargaProgDeLaGram("opcRestOfDesignator =  '.' ident.");
                         Code.Colorear("token");
+                        MessageBoxCon3Preg();
                         System.Windows.Forms.TreeNode hijo3 = new System.Windows.Forms.TreeNode("opcRestOfDesignator =  '.' ident.");
                         hijo2.Nodes.Add(hijo3);
                         hijo2.ExpandAll();
@@ -2181,6 +2264,7 @@ namespace at.jku.ssw.cc
                         MessageBoxCon3Preg(hijo3);
                         Check(Token.IDENT); //pos
                         Code.Colorear("token");
+                        MessageBoxCon3Preg();
                         hijo3.Nodes.Add("'Ident'");
                         MessageBoxCon3Preg(hijo3);
 
@@ -2237,11 +2321,15 @@ namespace at.jku.ssw.cc
             {
                 Code.cargaProgDeLaGram("opcRestOfDesignator =  .");
                 //-------------------------------------------------Grupo 2 30/9/2015-----------------------------------------------------------
+                MessageBoxCon3Preg();
                 hijo2.Nodes.Add(".");
                 hijo2.ExpandAll();
                 MessageBoxCon3Preg(hijo2);
+                MessageBoxCon3Preg();
                 Code.Load(item);
+                MessageBoxCon3Preg(hijo2);
             }
+            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(31);
             MessageBoxCon3Preg();
         } //Fin Designator
